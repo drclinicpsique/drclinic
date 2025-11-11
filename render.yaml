@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: drclinic
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    
+databases:
+  - name: drclinic-db
+    plan: free
