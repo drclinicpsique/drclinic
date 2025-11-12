@@ -15,7 +15,7 @@ class AdminUserSeeder extends Seeder
             [
                 'nome_completo' => 'Administrador',
                 'email' => 'admin@drclinic.com',
-                'password' => Hash::make('Admin@123'),
+                'password' => Hash::make('Admin@1234'),
                 'tipo_usuario' => 'admin',
                 'ativo' => true,
                 'created_at' => now(),
