@@ -8,27 +8,27 @@
         {{-- CABEÇALHO --}}
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
             <div>
-                <h2 class="text-3xl font-extrabold text-amber-900">
+                <h2 class="text-3xl font-extrabold text-green-900">
                     <i class="fas fa-calendar-alt mr-2"></i> Agendamentos
                 </h2>
-                <p class="text-amber-700 mt-2">
+                <p class="text-green-700 mt-2">
                     Gerencie os agendamentos e consultas da clínica
                 </p>
             </div>
 
             {{-- BOTÃO NOVO AGENDAMENTO --}}
             <a href="{{ route('agendamentos.create') }}"
-                class="mt-4 md:mt-0 inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-yellow-50 bg-amber-800 hover:bg-amber-900 transition duration-150">
+                class="mt-4 md:mt-0 inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-700 hover:bg-green-800 transition duration-150">
                 <i class="fas fa-calendar-plus mr-2"></i> Novo Agendamento
             </a>
         </div>
 
         {{-- MENSAGENS DE FEEDBACK --}}
         @if (session('success'))
-            <div class="mb-6 bg-yellow-50 border-l-4 border-amber-600 p-4 rounded-lg shadow-md animate-fade-in">
+            <div class="mb-6 bg-green-50 border-l-4 border-green-600 p-4 rounded-lg shadow-md animate-fade-in">
                 <div class="flex items-center">
-                    <i class="fas fa-check-circle text-amber-700 text-xl mr-3"></i>
-                    <p class="text-amber-900 font-semibold">{{ session('success') }}</p>
+                    <i class="fas fa-check-circle text-green-700 text-xl mr-3"></i>
+                    <p class="text-green-900 font-semibold">{{ session('success') }}</p>
                 </div>
             </div>
         @endif
@@ -43,33 +43,33 @@
         @endif
 
         {{-- CARD PRINCIPAL --}}
-        <div class="bg-yellow-50 shadow-lg rounded-lg overflow-hidden border-2 border-amber-900">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden border border-green-200">
 
             {{-- BARRA DE FILTROS --}}
-            <div class="bg-gradient-to-r from-amber-100 to-yellow-100 px-6 py-4 border-b-2 border-amber-900">
+            <div class="bg-gradient-to-r from-green-50 to-green-100 px-6 py-4 border-b border-green-200">
                 <form action="{{ route('agendamentos.index') }}" method="GET"
                     class="grid grid-cols-1 md:grid-cols-4 gap-4">
 
                     {{-- Data Início --}}
                     <div>
-                        <label for="data_inicio" class="block text-xs font-medium text-amber-900 mb-1">Data Início</label>
+                        <label for="data_inicio" class="block text-xs font-medium text-green-900 mb-1">Data Início</label>
                         <input type="date" name="data_inicio" id="data_inicio"
                             value="{{ $filtros['data_inicio'] ?? '' }}"
-                            class="w-full px-3 py-2 text-sm border-2 border-amber-200 rounded-md focus:ring-amber-500 focus:border-amber-500 bg-white">
+                            class="w-full px-3 py-2 text-sm border border-green-200 rounded-md focus:ring-green-500 focus:border-green-500 bg-white">
                     </div>
 
                     {{-- Data Fim --}}
                     <div>
-                        <label for="data_fim" class="block text-xs font-medium text-amber-900 mb-1">Data Fim</label>
+                        <label for="data_fim" class="block text-xs font-medium text-green-900 mb-1">Data Fim</label>
                         <input type="date" name="data_fim" id="data_fim" value="{{ $filtros['data_fim'] ?? '' }}"
-                            class="w-full px-3 py-2 text-sm border-2 border-amber-200 rounded-md focus:ring-amber-500 focus:border-amber-500 bg-white">
+                            class="w-full px-3 py-2 text-sm border border-green-200 rounded-md focus:ring-green-500 focus:border-green-500 bg-white">
                     </div>
 
                     {{-- Status --}}
                     <div>
-                        <label for="status" class="block text-xs font-medium text-amber-900 mb-1">Status</label>
+                        <label for="status" class="block text-xs font-medium text-green-900 mb-1">Status</label>
                         <select name="status" id="status"
-                            class="w-full px-3 py-2 text-sm border-2 border-amber-200 rounded-md focus:ring-amber-500 focus:border-amber-500 bg-white">
+                            class="w-full px-3 py-2 text-sm border border-green-200 rounded-md focus:ring-green-500 focus:border-green-500 bg-white">
                             <option value="">Todos</option>
                             <option value="agendado" {{ ($filtros['status'] ?? '') == 'agendado' ? 'selected' : '' }}>
                                 Agendado</option>
@@ -90,12 +90,12 @@
                     {{-- Botões --}}
                     <div class="flex items-end gap-2">
                         <button type="submit"
-                            class="flex-1 px-4 py-2 bg-amber-800 text-yellow-50 text-sm rounded-md hover:bg-amber-900 transition font-medium">
+                            class="flex-1 px-4 py-2 bg-green-700 text-white text-sm rounded-md hover:bg-green-800 transition font-medium">
                             <i class="fas fa-filter mr-1"></i> Filtrar
                         </button>
                         @if (!empty(array_filter($filtros)))
                             <a href="{{ route('agendamentos.index') }}"
-                                class="px-4 py-2 bg-yellow-700 text-yellow-50 text-sm rounded-md hover:bg-yellow-800 transition">
+                                class="px-4 py-2 bg-gray-600 text-white text-sm rounded-md hover:bg-gray-700 transition">
                                 <i class="fas fa-times"></i>
                             </a>
                         @endif
@@ -104,12 +104,12 @@
             </div>
 
             {{-- INFORMAÇÕES DE RESULTADOS --}}
-            <div class="px-6 py-3 bg-yellow-50 border-b-2 border-amber-200">
-                <p class="text-sm text-amber-900">
+            <div class="px-6 py-3 bg-green-50 border-b border-green-200">
+                <p class="text-sm text-green-900">
                     @if (!empty(array_filter($filtros)))
-                        <i class="fas fa-filter mr-1 text-amber-800 font-bold"></i>
-                        <span class="text-amber-900 font-semibold">Filtros ativos</span>
-                        <span class="text-amber-700 mx-2">|</span>
+                        <i class="fas fa-filter mr-1 text-green-800 font-bold"></i>
+                        <span class="text-green-900 font-semibold">Filtros ativos</span>
+                        <span class="text-green-700 mx-2">|</span>
                     @endif
                     <strong>{{ $agendamentos->total() }}</strong>
                     {{ $agendamentos->total() === 1 ? 'agendamento encontrado' : 'agendamentos encontrados' }}
@@ -119,68 +119,68 @@
             {{-- TABELA DE AGENDAMENTOS --}}
             @if ($agendamentos->count() > 0)
                 <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-amber-200">
-                        <thead class="bg-gradient-to-r from-amber-200 to-yellow-200">
+                    <table class="min-w-full divide-y divide-green-200">
+                        <thead class="bg-gradient-to-r from-green-100 to-green-200">
                             <tr>
-                                <th class="px-4 py-3 text-left text-xs font-bold text-amber-900 uppercase">
+                                <th class="px-4 py-3 text-left text-xs font-bold text-green-900 uppercase">
                                     <i class="far fa-calendar mr-1"></i> Data/Hora
                                 </th>
-                                <th class="px-4 py-3 text-left text-xs font-bold text-amber-900 uppercase">
+                                <th class="px-4 py-3 text-left text-xs font-bold text-green-900 uppercase">
                                     <i class="fas fa-user mr-1"></i> Paciente
                                 </th>
                                 <th
-                                    class="px-4 py-3 text-left text-xs font-bold text-amber-900 uppercase hidden md:table-cell">
+                                    class="px-4 py-3 text-left text-xs font-bold text-green-900 uppercase hidden md:table-cell">
                                     <i class="fas fa-user-md mr-1"></i> Profissional
                                 </th>
                                 <th
-                                    class="px-4 py-3 text-left text-xs font-bold text-amber-900 uppercase hidden lg:table-cell">
+                                    class="px-4 py-3 text-left text-xs font-bold text-green-900 uppercase hidden lg:table-cell">
                                     <i class="fas fa-stethoscope mr-1"></i> Motivo
                                 </th>
-                                <th class="w-24 px-2 py-3 text-center text-xs font-bold text-amber-900 uppercase">
+                                <th class="w-24 px-2 py-3 text-center text-xs font-bold text-green-900 uppercase">
                                     <i class="fas fa-info-circle" title="Status"></i>
                                 </th>
-                                <th class="px-4 py-3 text-right text-xs font-bold text-amber-900 uppercase">
+                                <th class="px-4 py-3 text-right text-xs font-bold text-green-900 uppercase">
                                     <i class="fas fa-cog mr-1"></i> Ações
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-amber-100">
+                        <tbody class="bg-white divide-y divide-green-100">
                             @foreach ($agendamentos as $agendamento)
-                                <tr class="hover:bg-yellow-50 transition-colors duration-150">
+                                <tr class="hover:bg-green-50 transition-colors duration-150">
 
                                     {{-- Data/Hora --}}
                                     <td class="px-4 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-semibold text-amber-900">
+                                        <div class="text-sm font-semibold text-green-900">
                                             {{ \Carbon\Carbon::parse($agendamento->data_hora_agendamento)->format('d/m/Y') }}
                                         </div>
-                                        <div class="text-xs text-amber-700">
+                                        <div class="text-xs text-green-700">
                                             {{ \Carbon\Carbon::parse($agendamento->data_hora_agendamento)->format('H:i') }}
                                         </div>
                                     </td>
 
                                     {{-- Paciente --}}
                                     <td class="px-4 py-4">
-                                        <div class="text-sm font-medium text-amber-900">
+                                        <div class="text-sm font-medium text-green-900">
                                             {{ $agendamento->paciente->nome_completo }}
                                         </div>
-                                        <div class="text-xs text-amber-700">
+                                        <div class="text-xs text-green-700">
                                             {{ $agendamento->paciente->telefone }}
                                         </div>
                                     </td>
 
                                     {{-- Profissional --}}
                                     <td class="px-4 py-4 hidden md:table-cell">
-                                        <div class="text-sm text-amber-900">
+                                        <div class="text-sm text-green-900">
                                             Dr(a). {{ $agendamento->profissional->usuario->nome_completo }}
                                         </div>
-                                        <div class="text-xs text-amber-700">
+                                        <div class="text-xs text-green-700">
                                             {{ $agendamento->profissional->especialidade }}
                                         </div>
                                     </td>
 
                                     {{-- Motivo --}}
                                     <td class="px-4 py-4 hidden lg:table-cell">
-                                        <div class="text-sm text-amber-900">
+                                        <div class="text-sm text-green-900">
                                             {{ Str::limit($agendamento->motivo_consulta ?? 'Não informado', 40) }}
                                         </div>
                                     </td>
@@ -190,14 +190,14 @@
                                         @php
                                             $statusColors = [
                                                 'agendado' => 'bg-blue-100 text-blue-800',
-                                                'confirmado' => 'bg-yellow-100 text-amber-900',
-                                                'em_atendimento' => 'bg-amber-100 text-amber-800',
-                                                'concluido' => 'bg-green-100 text-green-800',
+                                                'confirmado' => 'bg-green-100 text-green-800',
+                                                'em_atendimento' => 'bg-purple-100 text-purple-800',
+                                                'concluido' => 'bg-gray-100 text-gray-800',
                                                 'cancelado' => 'bg-red-100 text-red-800',
                                                 'falta_paciente' => 'bg-orange-100 text-orange-800',
                                             ];
                                             $colorClass =
-                                                $statusColors[$agendamento->status] ?? 'bg-amber-100 text-amber-800';
+                                                $statusColors[$agendamento->status] ?? 'bg-green-100 text-green-800';
 
                                             $statusLabels = [
                                                 'agendado' => 'Agendado',
@@ -222,7 +222,7 @@
 
                                             {{-- Ver --}}
                                             <a href="{{ route('agendamentos.show', $agendamento->id) }}"
-                                                class="text-amber-800 hover:text-amber-900 font-bold" title="Ver detalhes">
+                                                class="text-green-700 hover:text-green-900 font-bold" title="Ver detalhes">
                                                 <i class="fas fa-eye"></i>
                                             </a>
 
@@ -234,14 +234,14 @@
                                                 </span>
                                             @elseif($agendamento->emAtendimento())
                                                 {{-- EM ATENDIMENTO --}}
-                                                <span class="text-amber-700 font-bold animate-pulse"
+                                                <span class="text-purple-600 font-bold animate-pulse"
                                                     title="Em Atendimento Agora">
                                                     <i class="fas fa-hourglass-half"></i>
                                                 </span>
                                             @elseif($agendamento->podeIniciarConsulta())
                                                 {{-- PODE INICIAR --}}
                                                 <button type="button"
-                                                    class="btn-iniciar-consulta text-amber-800 hover:text-amber-900 font-bold"
+                                                    class="btn-iniciar-consulta text-green-700 hover:text-green-900 font-bold"
                                                     data-agendamento-id="{{ $agendamento->id }}"
                                                     data-paciente-nome="{{ $agendamento->paciente->nome_completo }}"
                                                     data-profissional-nome="Dr(a). {{ $agendamento->profissional->usuario->nome_completo }}"
@@ -264,7 +264,7 @@
                                             {{-- Editar --}}
                                             @if ($agendamento->status != 'cancelado' && $agendamento->status != 'concluido' && !$agendamento->emAtendimento())
                                                 <a href="{{ route('agendamentos.edit', $agendamento->id) }}"
-                                                    class="text-yellow-700 hover:text-yellow-900 font-bold"
+                                                    class="text-blue-600 hover:text-blue-900 font-bold"
                                                     title="Editar">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
@@ -291,17 +291,17 @@
                 </div>
 
                 {{-- PAGINAÇÃO --}}
-                <div class="bg-yellow-50 px-6 py-4 border-t-2 border-amber-200">
+                <div class="bg-green-50 px-6 py-4 border-t border-green-200">
                     {{ $agendamentos->appends($filtros)->links('vendor.pagination.tailwind') }}
                 </div>
             @else
                 {{-- EMPTY STATE --}}
                 <div class="text-center py-16 px-6">
-                    <i class="fas fa-calendar-times text-amber-300 text-6xl mb-4"></i>
-                    <h3 class="text-lg font-medium text-amber-900 mb-2">
+                    <i class="fas fa-calendar-times text-green-300 text-6xl mb-4"></i>
+                    <h3 class="text-lg font-medium text-green-900 mb-2">
                         Nenhum agendamento encontrado
                     </h3>
-                    <p class="text-amber-800 mb-6">
+                    <p class="text-green-800 mb-6">
                         @if (!empty(array_filter($filtros)))
                             Não encontramos agendamentos com os filtros selecionados.
                         @else
@@ -309,7 +309,7 @@
                         @endif
                     </p>
                     <a href="{{ route('agendamentos.create') }}"
-                        class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-yellow-50 bg-amber-800 hover:bg-amber-900">
+                        class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-700 hover:bg-green-800">
                         <i class="fas fa-calendar-plus mr-2"></i> Novo Agendamento
                     </a>
                 </div>
@@ -321,19 +321,19 @@
 
     {{-- MODAL DE CONFIRMAÇÃO DE CANCELAMENTO --}}
     <div id="modal-cancelar" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-        <div class="relative top-20 mx-auto p-5 border-2 w-96 shadow-lg rounded-md bg-yellow-50 border-amber-900">
+        <div class="relative top-20 mx-auto p-5 border-2 w-96 shadow-lg rounded-md bg-white border-green-300">
             <div class="mt-3 text-center">
                 <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
                     <i class="fas fa-exclamation-triangle text-red-600 text-2xl"></i>
                 </div>
-                <h3 class="text-lg leading-6 font-bold text-amber-900 mt-4">
+                <h3 class="text-lg leading-6 font-bold text-gray-900 mt-4">
                     Cancelar Agendamento
                 </h3>
                 <div class="mt-2 px-7 py-3">
-                    <p class="text-sm text-amber-800">
+                    <p class="text-sm text-gray-700">
                         Confirma o cancelamento do agendamento de <strong id="nome-paciente-cancelar"></strong>?
                     </p>
-                    <p class="text-xs text-amber-700 mt-2">
+                    <p class="text-xs text-gray-600 mt-2">
                         <strong id="data-hora-cancelar"></strong>
                     </p>
                 </div>
@@ -347,7 +347,7 @@
                         </button>
                     </form>
                     <button onclick="fecharModal()"
-                        class="px-4 py-2 bg-yellow-700 text-yellow-50 text-base font-medium rounded-md w-full shadow-sm hover:bg-yellow-800">
+                        class="px-4 py-2 bg-gray-600 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-700">
                         Voltar
                     </button>
                 </div>
@@ -358,32 +358,32 @@
     {{-- MODAL DE INICIAR CONSULTA --}}
     <div id="modal-iniciar-consulta"
         class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-        <div class="relative top-20 mx-auto p-5 border-2 w-96 shadow-lg rounded-md bg-yellow-50 border-amber-900">
+        <div class="relative top-20 mx-auto p-5 border-2 w-96 shadow-lg rounded-md bg-white border-green-300">
             <div class="mt-3 text-center">
-                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-amber-100">
-                    <i class="fas fa-play-circle text-amber-800 text-2xl"></i>
+                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+                    <i class="fas fa-play-circle text-green-700 text-2xl"></i>
                 </div>
-                <h3 class="text-lg leading-6 font-bold text-amber-900 mt-4">
+                <h3 class="text-lg leading-6 font-bold text-gray-900 mt-4">
                     Iniciar Consulta
                 </h3>
                 <div class="mt-2 px-7 py-3 text-left">
-                    <div class="bg-white p-3 rounded mb-3 border-l-4 border-amber-800">
-                        <p class="text-xs text-amber-700 font-medium"><strong>Paciente:</strong></p>
-                        <p class="text-sm text-amber-900 font-semibold" id="modal-paciente-nome">-</p>
+                    <div class="bg-green-50 p-3 rounded mb-3 border-l-4 border-green-700">
+                        <p class="text-xs text-green-700 font-medium"><strong>Paciente:</strong></p>
+                        <p class="text-sm text-green-900 font-semibold" id="modal-paciente-nome">-</p>
                     </div>
 
-                    <div class="bg-white p-3 rounded mb-3 border-l-4 border-amber-800">
-                        <p class="text-xs text-amber-700 font-medium"><strong>Profissional:</strong></p>
-                        <p class="text-sm text-amber-900 font-semibold" id="modal-profissional-nome">-</p>
+                    <div class="bg-green-50 p-3 rounded mb-3 border-l-4 border-green-700">
+                        <p class="text-xs text-green-700 font-medium"><strong>Profissional:</strong></p>
+                        <p class="text-sm text-green-900 font-semibold" id="modal-profissional-nome">-</p>
                     </div>
 
-                    <div class="bg-white p-3 rounded mb-3 border-l-4 border-amber-800">
-                        <p class="text-xs text-amber-700 font-medium"><strong>Duração Estimada:</strong></p>
-                        <p class="text-sm text-amber-900 font-semibold" id="modal-duracao">-</p>
+                    <div class="bg-green-50 p-3 rounded mb-3 border-l-4 border-green-700">
+                        <p class="text-xs text-green-700 font-medium"><strong>Duração Estimada:</strong></p>
+                        <p class="text-sm text-green-900 font-semibold" id="modal-duracao">-</p>
                     </div>
 
-                    <div class="bg-amber-100 border-l-4 border-amber-800 p-3 rounded">
-                        <p class="text-xs text-amber-900">
+                    <div class="bg-green-100 border-l-4 border-green-700 p-3 rounded">
+                        <p class="text-xs text-green-900">
                             <i class="fas fa-info-circle mr-1"></i>
                             <strong>Ao iniciar:</strong> Um prontuário será criado vinculado a este agendamento.
                         </p>
@@ -393,12 +393,12 @@
                     <form id="form-iniciar-consulta" method="POST">
                         @csrf
                         <button type="submit"
-                            class="px-4 py-2 bg-amber-800 text-yellow-50 text-base font-medium rounded-md w-full shadow-sm hover:bg-amber-900 mb-2">
+                            class="px-4 py-2 bg-green-700 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-800 mb-2">
                             <i class="fas fa-play-circle mr-2"></i> Iniciar Consulta
                         </button>
                     </form>
                     <button onclick="fecharModalIniciar()"
-                        class="px-4 py-2 bg-yellow-700 text-yellow-50 text-base font-medium rounded-md w-full shadow-sm hover:bg-yellow-800">
+                        class="px-4 py-2 bg-gray-600 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-700">
                         Voltar
                     </button>
                 </div>
@@ -411,23 +411,23 @@
         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
             {{-- Card: Consultas Hoje --}}
-            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-amber-500 hover:shadow-lg transition">
+            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500 hover:shadow-lg transition">
                 <div class="flex items-center">
-                    <div class="flex-shrink-0 bg-gradient-to-br from-amber-100 to-yellow-100 rounded-md p-3">
-                        <i class="fas fa-calendar-day text-amber-600 text-2xl"></i>
+                    <div class="flex-shrink-0 bg-gradient-to-br from-green-100 to-green-200 rounded-md p-3">
+                        <i class="fas fa-calendar-day text-green-700 text-2xl"></i>
                     </div>
                     <div class="ml-5 w-0 flex-1">
                         <dl>
-                            <dt class="text-sm font-medium text-amber-700 truncate">
+                            <dt class="text-sm font-medium text-green-700 truncate">
                                 Consultas Hoje
                             </dt>
                             <dd class="flex items-baseline">
-                                <div class="text-3xl font-bold text-amber-900">
+                                <div class="text-3xl font-bold text-green-900">
                                     {{ $estatisticas['hoje'] }}
                                 </div>
                             </dd>
                             @if ($estatisticas['aguardando_hoje'] > 0)
-                                <dd class="text-xs text-amber-600 mt-1">
+                                <dd class="text-xs text-green-600 mt-1">
                                     <i class="fas fa-clock mr-1"></i>
                                     {{ $estatisticas['aguardando_hoje'] }} aguardando
                                 </dd>
@@ -438,22 +438,22 @@
             </div>
 
             {{-- Card: Consultas na Semana --}}
-            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-yellow-500 hover:shadow-lg transition">
+            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-emerald-500 hover:shadow-lg transition">
                 <div class="flex items-center">
-                    <div class="flex-shrink-0 bg-gradient-to-br from-yellow-100 to-amber-100 rounded-md p-3">
-                        <i class="fas fa-calendar-week text-yellow-600 text-2xl"></i>
+                    <div class="flex-shrink-0 bg-gradient-to-br from-emerald-100 to-emerald-200 rounded-md p-3">
+                        <i class="fas fa-calendar-week text-emerald-700 text-2xl"></i>
                     </div>
                     <div class="ml-5 w-0 flex-1">
                         <dl>
-                            <dt class="text-sm font-medium text-yellow-700 truncate">
+                            <dt class="text-sm font-medium text-emerald-700 truncate">
                                 Consultas esta Semana
                             </dt>
                             <dd class="flex items-baseline">
-                                <div class="text-3xl font-bold text-yellow-900">
+                                <div class="text-3xl font-bold text-emerald-900">
                                     {{ $estatisticas['semana'] }}
                                 </div>
                             </dd>
-                            <dd class="text-xs text-yellow-600 mt-1">
+                            <dd class="text-xs text-emerald-600 mt-1">
                                 <i class="fas fa-calendar-alt mr-1"></i>
                                 {{ now()->locale('pt_BR')->startOfWeek()->format('d/m') }} -
                                 {{ now()->locale('pt_BR')->endOfWeek()->format('d/m') }}
@@ -464,22 +464,22 @@
             </div>
 
             {{-- Card: Consultas no Mês --}}
-            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-amber-600 hover:shadow-lg transition">
+            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-teal-500 hover:shadow-lg transition">
                 <div class="flex items-center">
-                    <div class="flex-shrink-0 bg-gradient-to-br from-amber-100 to-yellow-100 rounded-md p-3">
-                        <i class="fas fa-calendar-alt text-amber-700 text-2xl"></i>
+                    <div class="flex-shrink-0 bg-gradient-to-br from-teal-100 to-teal-200 rounded-md p-3">
+                        <i class="fas fa-calendar-alt text-teal-700 text-2xl"></i>
                     </div>
                     <div class="ml-5 w-0 flex-1">
                         <dl>
-                            <dt class="text-sm font-medium text-amber-700 truncate">
+                            <dt class="text-sm font-medium text-teal-700 truncate">
                                 Consultas este Mês
                             </dt>
                             <dd class="flex items-baseline">
-                                <div class="text-3xl font-bold text-amber-900">
+                                <div class="text-3xl font-bold text-teal-900">
                                     {{ $estatisticas['mes'] }}
                                 </div>
                             </dd>
-                            <dd class="text-xs text-amber-600 mt-1">
+                            <dd class="text-xs text-teal-600 mt-1">
                                 <i class="fas fa-calendar mr-1"></i>
                                 {{ now()->locale('pt_BR')->translatedFormat('F Y') }}
                             </dd>
@@ -489,23 +489,23 @@
             </div>
 
             {{-- Card: Em Atendimento Agora --}}
-            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500 hover:shadow-lg transition">
+            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-purple-500 hover:shadow-lg transition">
                 <div class="flex items-center">
-                    <div class="flex-shrink-0 bg-gradient-to-br from-green-100 to-emerald-100 rounded-md p-3">
-                        <i class="fas fa-user-md text-green-600 text-2xl"></i>
+                    <div class="flex-shrink-0 bg-gradient-to-br from-purple-100 to-purple-200 rounded-md p-3">
+                        <i class="fas fa-user-md text-purple-700 text-2xl"></i>
                     </div>
                     <div class="ml-5 w-0 flex-1">
                         <dl>
-                            <dt class="text-sm font-medium text-green-700 truncate">
+                            <dt class="text-sm font-medium text-purple-700 truncate">
                                 Em Atendimento
                             </dt>
                             <dd class="flex items-baseline">
-                                <div class="text-3xl font-bold text-green-900">
+                                <div class="text-3xl font-bold text-purple-900">
                                     {{ $estatisticas['em_atendimento'] }}
                                 </div>
                             </dd>
                             @if ($estatisticas['em_atendimento'] > 0)
-                                <dd class="text-xs text-green-600 mt-1 animate-pulse">
+                                <dd class="text-xs text-purple-600 mt-1 animate-pulse">
                                     <i class="fas fa-circle mr-1"></i>
                                     Consultas ativas agora
                                 </dd>

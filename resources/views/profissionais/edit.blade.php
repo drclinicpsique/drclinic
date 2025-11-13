@@ -1,4 +1,3 @@
-// resources/views/profissionais/edit.blade.php
 @extends('layouts.app')
 
 @section('title', 'Editar Profissional: ' . ($profissional->nome_completo ?? ''))
@@ -131,7 +130,7 @@
                     <input type="text"
                         name="telefone"
                         id="telefone"
-                        value="{{ old('telefone', $profissional->usuario->telefone) }}"
+                        value="{{ old('telefone', formatarTelefone($profissional->usuario->telefone)) }}"
                         x-model="form.telefone"
                         class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 @error('telefone') border-red-500 @enderror"
                         placeholder="(00) 00000-0000"
@@ -259,7 +258,7 @@
                     <input type="text"
                         name="telefone_consultorio"
                         id="telefone_consultorio"
-                        value="{{ old('telefone_consultorio', $profissional->telefone_consultorio) }}"
+                        value="{{ old('telefone_consultorio', formatarTelefone($profissional->telefone_consultorio)) }}"
                         x-model="form.telefone_consultorio"
                         class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 @error('telefone_consultorio') border-red-500 @enderror"
                         placeholder="(00) 00000-0000"
@@ -400,10 +399,10 @@
             form: {
                 nome_completo: '{{ old("nome_completo", $profissional->usuario->nome_completo) }}',
                 email: '{{ old("email", $profissional->usuario->email) }}',
-                telefone: '{{ old("telefone", $profissional->usuario->telefone) }}',
+                telefone: '{{ old("telefone", formatarTelefone($profissional->usuario->telefone)) }}',
                 crm: '{{ old("crm", $profissional->crm) }}',
                 especialidade: '{{ old("especialidade", $profissional->especialidade) }}',
-                telefone_consultorio: '{{ old("telefone_consultorio", $profissional->telefone_consultorio) }}',
+                telefone_consultorio: '{{ old("telefone_consultorio", formatarTelefone($profissional->telefone_consultorio)) }}',
                 formacao_academica: '{{ old("formacao_academica", $profissional->formacao_academica) }}',
                 observacoes: '{{ old("observacoes", $profissional->observacoes) }}'
             },

@@ -8,17 +8,17 @@
     {{-- CABEÇALHO --}}
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
         <div>
-            <h2 class="text-3xl font-extrabold text-amber-900">
+            <h2 class="text-3xl font-extrabold text-fuchsia-900">
                 <i class="fas fa-microscope mr-2"></i> Detalhes do Exame
             </h2>
-            <p class="text-amber-700 mt-2">
+            <p class="text-fuchsia-700 mt-2">
                 ID: #{{ $exame->id }} - {{ $exame->tipoExame->nome }}
             </p>
         </div>
 
         <div class="mt-4 md:mt-0 flex flex-wrap gap-2">
             <a href="{{ route('exames.index') }}"
-               class="inline-flex items-center px-4 py-2 bg-yellow-700 text-yellow-50 text-sm rounded-md hover:bg-yellow-800 transition">
+               class="inline-flex items-center px-4 py-2 bg-gray-600 text-white text-sm rounded-md hover:bg-gray-700 transition">
                 <i class="fas fa-arrow-left mr-2"></i> Voltar
             </a>
         </div>
@@ -26,10 +26,10 @@
 
     {{-- MENSAGENS --}}
     @if(session('success'))
-    <div class="mb-6 bg-yellow-50 border-l-4 border-amber-600 p-4 rounded-lg shadow-md animate-fade-in">
+    <div class="mb-6 bg-fuchsia-50 border-l-4 border-fuchsia-600 p-4 rounded-lg shadow-md animate-fade-in">
         <div class="flex items-center">
-            <i class="fas fa-check-circle text-amber-700 text-xl mr-3"></i>
-            <p class="text-amber-900 font-semibold">{{ session('success') }}</p>
+            <i class="fas fa-check-circle text-fuchsia-700 text-xl mr-3"></i>
+            <p class="text-fuchsia-900 font-semibold">{{ session('success') }}</p>
         </div>
     </div>
     @endif
@@ -44,21 +44,21 @@
     @endif
 
     {{-- STATUS --}}
-    <div class="mb-6 bg-yellow-50 rounded-lg shadow-lg p-6 border-2 border-amber-900">
+    <div class="mb-6 bg-fuchsia-50 rounded-lg shadow-lg p-6 border-2 border-fuchsia-700">
         <div class="flex items-center justify-between">
             <div>
-                <h3 class="text-lg font-bold text-amber-900">Status do Exame</h3>
-                <p class="text-amber-700 text-sm mt-1">Última atualização: {{ $exame->updated_at->format('d/m/Y H:i') }}</p>
+                <h3 class="text-lg font-bold text-fuchsia-900">Status do Exame</h3>
+                <p class="text-fuchsia-700 text-sm mt-1">Última atualização: {{ $exame->updated_at->format('d/m/Y H:i') }}</p>
             </div>
             <div>
                 @php
                     $statusColors = [
                         'solicitado' => 'bg-blue-100 text-blue-800 border-blue-300',
-                        'em_analise' => 'bg-yellow-100 text-amber-900 border-amber-300',
+                        'em_analise' => 'bg-purple-100 text-purple-800 border-purple-300',
                         'concluido' => 'bg-green-100 text-green-800 border-green-300',
                         'cancelado' => 'bg-red-100 text-red-800 border-red-300',
                     ];
-                    $colorClass = $statusColors[$exame->status] ?? 'bg-amber-100 text-amber-800 border-amber-300';
+                    $colorClass = $statusColors[$exame->status] ?? 'bg-fuchsia-100 text-fuchsia-800 border-fuchsia-300';
                 @endphp
                 <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-bold border-2 {{ $colorClass }}">
                     {{ ucfirst($exame->status) }}
@@ -73,44 +73,44 @@
         <div class="lg:col-span-2 space-y-6">
 
             {{-- CARD: DADOS DO EXAME --}}
-            <div class="bg-yellow-50 rounded-lg shadow-lg p-6 border-l-4 border-amber-900">
-                <h3 class="text-xl font-bold text-amber-900 mb-4 pb-2 border-b-2 border-amber-200">
+            <div class="bg-fuchsia-50 rounded-lg shadow-lg p-6 border-l-4 border-fuchsia-700">
+                <h3 class="text-xl font-bold text-fuchsia-900 mb-4 pb-2 border-b-2 border-fuchsia-200">
                     <i class="fas fa-flask mr-2"></i> Dados do Exame
                 </h3>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-sm font-medium text-amber-700 mb-1">Tipo de Exame</label>
-                        <p class="text-lg font-semibold text-amber-900">{{ $exame->tipoExame->nome }}</p>
+                        <label class="block text-sm font-medium text-fuchsia-700 mb-1">Tipo de Exame</label>
+                        <p class="text-lg font-semibold text-fuchsia-900">{{ $exame->tipoExame->nome }}</p>
                         @if($exame->tipoExame->codigo_tuss)
-                        <p class="text-sm text-amber-800">Código TUSS: {{ $exame->tipoExame->codigo_tuss }}</p>
+                        <p class="text-sm text-fuchsia-800">Código TUSS: {{ $exame->tipoExame->codigo_tuss }}</p>
                         @endif
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-amber-700 mb-1">Categoria</label>
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-amber-100 text-amber-900">
+                        <label class="block text-sm font-medium text-fuchsia-700 mb-1">Categoria</label>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-fuchsia-100 text-fuchsia-900">
                             <i class="fas fa-tag mr-1"></i>
                             {{ $exame->tipoExame->categoria }}
                         </span>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-amber-700 mb-1">Data da Solicitação</label>
-                        <p class="text-lg font-semibold text-amber-900">{{ $exame->data_solicitacao_formatada }}</p>
+                        <label class="block text-sm font-medium text-fuchsia-700 mb-1">Data da Solicitação</label>
+                        <p class="text-lg font-semibold text-fuchsia-900">{{ $exame->data_solicitacao_formatada }}</p>
                     </div>
 
                     @if($exame->data_prevista_resultado)
                     <div>
-                        <label class="block text-sm font-medium text-amber-700 mb-1">Previsão de Resultado</label>
-                        <p class="text-lg font-semibold text-amber-900">
+                        <label class="block text-sm font-medium text-fuchsia-700 mb-1">Previsão de Resultado</label>
+                        <p class="text-lg font-semibold text-fuchsia-900">
                             {{ $exame->data_prevista_resultado->format('d/m/Y') }}
                         </p>
                         @php
                             $diasRestantes = now()->diffInDays($exame->data_prevista_resultado, false);
                         @endphp
                         @if($diasRestantes > 0)
-                        <p class="text-xs text-amber-700 mt-1">
+                        <p class="text-xs text-fuchsia-700 mt-1">
                             <i class="fas fa-clock mr-1"></i>
                             Faltam {{ $diasRestantes }} {{ $diasRestantes == 1 ? 'dia' : 'dias' }}
                         </p>
@@ -130,58 +130,58 @@
                 </div>
 
                 @if($exame->tipoExame->preparacao_necessaria)
-                <div class="mt-6 p-4 bg-amber-100 rounded border-l-4 border-amber-800">
-                    <p class="text-sm font-bold text-amber-900 mb-2">
+                <div class="mt-6 p-4 bg-purple-100 rounded border-l-4 border-purple-600">
+                    <p class="text-sm font-bold text-purple-900 mb-2">
                         <i class="fas fa-exclamation-circle mr-1"></i> Preparação Necessária:
                     </p>
-                    <p class="text-sm text-amber-900">{{ $exame->tipoExame->preparacao_necessaria }}</p>
+                    <p class="text-sm text-purple-900">{{ $exame->tipoExame->preparacao_necessaria }}</p>
                 </div>
                 @endif
 
                 @if($exame->observacoes_solicitacao)
                 <div class="mt-6">
-                    <label class="block text-sm font-medium text-amber-700 mb-2">Observações da Solicitação</label>
-                    <div class="bg-white p-4 rounded border-l-4 border-amber-800">
-                        <p class="text-amber-900 whitespace-pre-wrap">{{ $exame->observacoes_solicitacao }}</p>
+                    <label class="block text-sm font-medium text-fuchsia-700 mb-2">Observações da Solicitação</label>
+                    <div class="bg-white p-4 rounded border-l-4 border-fuchsia-700">
+                        <p class="text-fuchsia-900 whitespace-pre-wrap">{{ $exame->observacoes_solicitacao }}</p>
                     </div>
                 </div>
                 @endif
             </div>
 
             {{-- CARD: PACIENTE --}}
-            <div class="bg-yellow-50 rounded-lg shadow-lg p-6 border-l-4 border-yellow-700">
-                <h3 class="text-xl font-bold text-amber-900 mb-4 pb-2 border-b-2 border-amber-200">
+            <div class="bg-fuchsia-50 rounded-lg shadow-lg p-6 border-l-4 border-purple-700">
+                <h3 class="text-xl font-bold text-fuchsia-900 mb-4 pb-2 border-b-2 border-fuchsia-200">
                     <i class="fas fa-user mr-2"></i> Paciente
                 </h3>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-sm font-medium text-amber-700 mb-1">Nome Completo</label>
-                        <p class="text-lg font-semibold text-amber-900">{{ $exame->prontuario->paciente->nome_completo }}</p>
+                        <label class="block text-sm font-medium text-fuchsia-700 mb-1">Nome Completo</label>
+                        <p class="text-lg font-semibold text-fuchsia-900">{{ $exame->prontuario->paciente->nome_completo }}</p>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-amber-700 mb-1">CPF</label>
-                        <p class="text-lg font-semibold text-amber-900 font-mono">{{ $exame->prontuario->paciente->cpf_formatado }}</p>
+                        <label class="block text-sm font-medium text-fuchsia-700 mb-1">CPF</label>
+                        <p class="text-lg font-semibold text-fuchsia-900 font-mono">{{ $exame->prontuario->paciente->cpf_formatado }}</p>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-amber-700 mb-1">Data de Nascimento</label>
-                        <p class="text-lg font-semibold text-amber-900">
+                        <label class="block text-sm font-medium text-fuchsia-700 mb-1">Data de Nascimento</label>
+                        <p class="text-lg font-semibold text-fuchsia-900">
                             {{ $exame->prontuario->paciente->data_nascimento_formatada }}
-                            <span class="text-sm text-amber-700">({{ $exame->prontuario->paciente->idade }} anos)</span>
+                            <span class="text-sm text-fuchsia-700">({{ $exame->prontuario->paciente->idade }} anos)</span>
                         </p>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-amber-700 mb-1">Telefone</label>
-                        <p class="text-lg font-semibold text-amber-900">{{ $exame->prontuario->paciente->telefone }}</p>
+                        <label class="block text-sm font-medium text-fuchsia-700 mb-1">Telefone</label>
+                        <p class="text-lg font-semibold text-fuchsia-900">{{ $exame->prontuario->paciente->telefone }}</p>
                     </div>
                 </div>
 
-                <div class="mt-4 pt-4 border-t-2 border-amber-200">
+                <div class="mt-4 pt-4 border-t-2 border-fuchsia-200">
                     <a href="{{ route('pacientes.show', $exame->prontuario->paciente->id) }}"
-                       class="inline-flex items-center px-4 py-2 bg-amber-800 text-yellow-50 text-sm rounded hover:bg-amber-900 transition">
+                       class="inline-flex items-center px-4 py-2 bg-fuchsia-700 text-white text-sm rounded hover:bg-fuchsia-800 transition">
                         <i class="fas fa-eye mr-2"></i> Ver Ficha do Paciente
                     </a>
                 </div>
@@ -278,8 +278,8 @@
         <div class="lg:col-span-1 space-y-6">
 
             {{-- CARD: AÇÕES RÁPIDAS --}}
-            <div class="bg-amber-50 rounded-lg shadow-lg p-6 border-2 border-amber-200">
-                <h3 class="text-lg font-bold text-amber-900 mb-4">
+            <div class="bg-fuchsia-50 rounded-lg shadow-lg p-6 border-2 border-fuchsia-200">
+                <h3 class="text-lg font-bold text-fuchsia-900 mb-4">
                     <i class="fas fa-bolt mr-2"></i> Ações Rápidas
                 </h3>
 
@@ -298,7 +298,7 @@
                     {{-- SE NÃO TEM RESULTADO E NÃO ESTÁ CANCELADO --}}
                     @elseif($exame->status != 'cancelado')
                     <a href="{{ route('exames.resultado.create', $exame->id) }}"
-                       class="block w-full text-center px-4 py-2 bg-green-700 text-yellow-50 text-sm rounded hover:bg-green-800 transition font-medium">
+                       class="block w-full text-center px-4 py-2 bg-purple-700 text-white text-sm rounded hover:bg-purple-800 transition font-medium">
                         <i class="fas fa-flask mr-2"></i> Cadastrar Resultado
                     </a>
 
@@ -314,57 +314,57 @@
             </div>
 
             {{-- CARD: PROFISSIONAL SOLICITANTE --}}
-            <div class="bg-yellow-50 rounded-lg shadow-lg p-6 border-l-4 border-amber-900">
-                <h3 class="text-lg font-bold text-amber-900 mb-4">
+            <div class="bg-fuchsia-50 rounded-lg shadow-lg p-6 border-l-4 border-fuchsia-700">
+                <h3 class="text-lg font-bold text-fuchsia-900 mb-4">
                     <i class="fas fa-user-md mr-2"></i> Profissional Solicitante
                 </h3>
 
                 <div class="space-y-3 text-sm">
                     <div>
-                        <label class="block text-xs font-medium text-amber-700 mb-1">Nome</label>
-                        <p class="font-bold text-amber-900">
+                        <label class="block text-xs font-medium text-fuchsia-700 mb-1">Nome</label>
+                        <p class="font-bold text-fuchsia-900">
                             Dr(a). {{ $exame->profissionalSolicitante->usuario->nome_completo }}
                         </p>
                     </div>
 
-                    <div class="pt-3 border-t-2 border-amber-200">
-                        <label class="block text-xs font-medium text-amber-700 mb-1">Especialidade</label>
-                        <p class="font-bold text-amber-900">{{ $exame->profissionalSolicitante->especialidade }}</p>
+                    <div class="pt-3 border-t-2 border-fuchsia-200">
+                        <label class="block text-xs font-medium text-fuchsia-700 mb-1">Especialidade</label>
+                        <p class="font-bold text-fuchsia-900">{{ $exame->profissionalSolicitante->especialidade }}</p>
                     </div>
 
-                    <div class="pt-3 border-t-2 border-amber-200">
-                        <label class="block text-xs font-medium text-amber-700 mb-1">CRM</label>
-                        <p class="font-bold text-amber-900 font-mono">{{ $exame->profissionalSolicitante->crm_formatado }}</p>
+                    <div class="pt-3 border-t-2 border-fuchsia-200">
+                        <label class="block text-xs font-medium text-fuchsia-700 mb-1">CRM</label>
+                        <p class="font-bold text-fuchsia-900 font-mono">{{ $exame->profissionalSolicitante->crm_formatado }}</p>
                     </div>
                 </div>
             </div>
 
             {{-- CARD: INFORMAÇÕES --}}
-            <div class="bg-yellow-50 rounded-lg shadow-lg p-6 border-l-4 border-amber-900">
-                <h3 class="text-lg font-bold text-amber-900 mb-4">
+            <div class="bg-fuchsia-50 rounded-lg shadow-lg p-6 border-l-4 border-fuchsia-700">
+                <h3 class="text-lg font-bold text-fuchsia-900 mb-4">
                     <i class="fas fa-info-circle mr-2"></i> Informações
                 </h3>
 
                 <div class="space-y-3 text-sm">
                     <div>
-                        <span class="text-amber-700 font-medium">Prontuário:</span>
-                        <div class="font-bold text-amber-900">#{{ $exame->prontuario_id }}</div>
+                        <span class="text-fuchsia-700 font-medium">Prontuário:</span>
+                        <div class="font-bold text-fuchsia-900">#{{ $exame->prontuario_id }}</div>
                     </div>
 
-                    <div class="pt-3 border-t-2 border-amber-200">
-                        <span class="text-amber-700 font-medium">Criado em:</span>
-                        <div class="font-bold text-amber-900">{{ $exame->created_at->format('d/m/Y H:i') }}</div>
+                    <div class="pt-3 border-t-2 border-fuchsia-200">
+                        <span class="text-fuchsia-700 font-medium">Criado em:</span>
+                        <div class="font-bold text-fuchsia-900">{{ $exame->created_at->format('d/m/Y H:i') }}</div>
                     </div>
 
-                    <div class="pt-3 border-t-2 border-amber-200">
-                        <span class="text-amber-700 font-medium">Atualizado em:</span>
-                        <div class="font-bold text-amber-900">{{ $exame->updated_at->format('d/m/Y H:i') }}</div>
+                    <div class="pt-3 border-t-2 border-fuchsia-200">
+                        <span class="text-fuchsia-700 font-medium">Atualizado em:</span>
+                        <div class="font-bold text-fuchsia-900">{{ $exame->updated_at->format('d/m/Y H:i') }}</div>
                     </div>
 
                     @if($exame->tipoExame->preco_referencia)
-                    <div class="pt-3 border-t-2 border-amber-200">
-                        <span class="text-amber-700 font-medium">Preço Referência:</span>
-                        <div class="font-bold text-amber-900">{{ $exame->tipoExame->preco_formatado }}</div>
+                    <div class="pt-3 border-t-2 border-fuchsia-200">
+                        <span class="text-fuchsia-700 font-medium">Preço Referência:</span>
+                        <div class="font-bold text-fuchsia-900">{{ $exame->tipoExame->preco_formatado }}</div>
                     </div>
                     @endif
                 </div>

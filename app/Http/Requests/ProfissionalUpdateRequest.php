@@ -14,10 +14,7 @@ class ProfissionalUpdateRequest extends FormRequest
 
     public function rules(): array
     {
-        // Captura robusta do ID (suporta rotas com 'id' ou 'profissional')
         $profissionalId = (int) ($this->route('id') ?? $this->route('profissional') ?? 0);
-
-        // Evita erro caso não encontre o profissional (fallback null)
         $profissional = \App\Models\Profissional::find($profissionalId);
         $usuarioId = $profissional->usuario_id ?? null;
 
@@ -30,7 +27,7 @@ class ProfissionalUpdateRequest extends FormRequest
                 'max:100',
                 Rule::unique('usuarios', 'email')->ignore($usuarioId),
             ],
-            'telefone' => ['nullable', 'string', 'max:20'],
+            'telefone' => ['nullable', 'string', 'digits_between:10,11'],
 
             // Profissional
             'crm' => [
@@ -42,7 +39,7 @@ class ProfissionalUpdateRequest extends FormRequest
                 'regex:/^[0-9]{4,10}\/[A-Z]{2}$/',
             ],
             'especialidade' => ['required', 'string', 'max:100', 'min:3'],
-            'telefone_consultorio' => ['nullable', 'string', 'max:20'],
+            'telefone_consultorio' => ['nullable', 'string', 'digits_between:10,11'],
             'formacao_academica' => ['nullable', 'string', 'max:2000'],
             'observacoes' => ['nullable', 'string', 'max:2000'],
             'ativo' => ['sometimes', 'boolean'],
@@ -58,6 +55,8 @@ class ProfissionalUpdateRequest extends FormRequest
             'email.required' => 'O email é obrigatório.',
             'email.unique' => 'Este email já está cadastrado para outro usuário.',
 
+            'telefone.digits_between' => 'O telefone deve ter entre 10 e 11 dígitos.',
+
             'crm.required' => 'O CRM é obrigatório.',
             'crm.min' => 'O CRM deve ter no mínimo 3 caracteres.',
             'crm.unique' => 'Este CRM já está cadastrado para outro profissional.',
@@ -66,6 +65,8 @@ class ProfissionalUpdateRequest extends FormRequest
             'especialidade.required' => 'A especialidade é obrigatória.',
             'especialidade.min' => 'A especialidade deve ter no mínimo 3 caracteres.',
 
+            'telefone_consultorio.digits_between' => 'O telefone do consultório deve ter entre 10 e 11 dígitos.',
+
             'formacao_academica.max' => 'A formação acadêmica deve ter no máximo 2000 caracteres.',
             'observacoes.max' => 'As observações devem ter no máximo 2000 caracteres.',
         ];
@@ -73,30 +74,36 @@ class ProfissionalUpdateRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        // Normaliza CRM para o padrão 00000/UF (maiúsculas, remove ruído)
+        // Normaliza CRM para o padrão 00000/UF
         if ($this->crm) {
             $crmLimpo = strtoupper(preg_replace('/[^0-9A-Z\/]/', '', $this->crm));
             $this->merge(['crm' => $crmLimpo]);
         }
 
-        // Limpa telefones vazios do payload (respeita nullable)
-        if ($this->telefone && trim($this->telefone) === '') {
-            $this->request->remove('telefone');
-        } elseif ($this->telefone) {
-            $this->merge(['telefone' => trim($this->telefone)]);
+        // Remove TODA a máscara dos telefones (salva apenas números)
+        if ($this->telefone) {
+            $telefoneLimpo = preg_replace('/[^0-9]/', '', $this->telefone);
+            if (empty($telefoneLimpo)) {
+                $this->request->remove('telefone');
+            } else {
+                $this->merge(['telefone' => $telefoneLimpo]);
+            }
         }
 
-        if ($this->telefone_consultorio && trim($this->telefone_consultorio) === '') {
-            $this->request->remove('telefone_consultorio');
-        } elseif ($this->telefone_consultorio) {
-            $this->merge(['telefone_consultorio' => trim($this->telefone_consultorio)]);
+        if ($this->telefone_consultorio) {
+            $telefoneLimpo = preg_replace('/[^0-9]/', '', $this->telefone_consultorio);
+            if (empty($telefoneLimpo)) {
+                $this->request->remove('telefone_consultorio');
+            } else {
+                $this->merge(['telefone_consultorio' => $telefoneLimpo]);
+            }
         }
     }
 
     public function withValidator($validator): void
     {
         $validator->after(function ($validator) {
-            // Whitelist de UF para CRM (mantém validação sem duplicar regex)
+            // Validação adicional de CRM
             if ($this->crm) {
                 $partes = explode('/', $this->crm);
                 if (count($partes) === 2) {
@@ -112,27 +119,7 @@ class ProfissionalUpdateRequest extends FormRequest
                         $validator->errors()->add('crm', 'A UF do CRM é inválida. Use siglas válidas (ex: SP, RJ, MG).');
                     }
                 } else {
-                    // Estrutura incorreta (fallback adicional)
                     $validator->errors()->add('crm', 'O CRM deve conter o número e a UF separados por barra (/).');
-                }
-            }
-
-            // Telefones: valida quando preenchidos (formato mascarado)
-            if ($this->filled('telefone')) {
-                $telefoneLimpo = preg_replace('/[^0-9]/', '', $this->telefone);
-                if (strlen($telefoneLimpo) > 0) {
-                    if (!preg_match('/^\(\d{2}\) \d{4,5}-\d{4}$/', $this->telefone)) {
-                        $validator->errors()->add('telefone', 'O telefone deve estar no formato (00) 00000-0000 ou (00) 0000-0000.');
-                    }
-                }
-            }
-
-            if ($this->filled('telefone_consultorio')) {
-                $telefoneLimpo = preg_replace('/[^0-9]/', '', $this->telefone_consultorio);
-                if (strlen($telefoneLimpo) > 0) {
-                    if (!preg_match('/^\(\d{2}\) \d{4,5}-\d{4}$/', $this->telefone_consultorio)) {
-                        $validator->errors()->add('telefone_consultorio', 'O telefone do consultório deve estar no formato (00) 00000-0000 ou (00) 0000-0000.');
-                    }
                 }
             }
         });
